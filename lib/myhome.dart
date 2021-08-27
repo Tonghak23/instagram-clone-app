@@ -8,6 +8,7 @@ class MyHome extends StatefulWidget {
 class _MyHomeState extends State<MyHome> {
       String profile = "https://static.wixstatic.com/media/902040_30336145aa8b40d8b6e898e3e107f92c~mv2.png/v1/fill/w_300,h_302,al_c,q_85,usm_0.66_1.00_0.01/User%2005c.webp";
       int currentPage=0;
+      String username="Takexn404";
       var _scaffoldkey = GlobalKey<ScaffoldState>();
       List<String> profileStory=[
         "assets/img/1.jpg",
@@ -20,16 +21,41 @@ class _MyHomeState extends State<MyHome> {
         "assets/img/13.jpg",
         "assets/img/14.jpg",
         "assets/img/15.png",
-    ];
+      ];
+      List<String> post=[
+
+            // "assets/img/2.jpg",
+            // "assets/img/3.jpg",
+            // "assets/img/5.jpg",
+            // "assets/img/8.jpg",
+            // "assets/img/9.jpg",
+            // "assets/img/11.jpg",
+            // "assets/img/12.jpg",
+            // "assets/img/13.jpg",
+            // "assets/img/14.jpg",
+            "assets/img/16.jpg",
+            "assets/img/17.jpg",
+            "assets/img/18.jpg",
+            "assets/img/19.jpg",
+            "assets/img/20.jpg",
+            "assets/img/21.jpg",
+            "assets/img/22.jpg",
+            "assets/img/23.jpg",
+            "assets/img/24.jpg",
+            "assets/img/25.jpg"
+      ];
+      Future<void> onRefresh()async{
+        await Future.delayed(Duration(seconds: 2),);
+      }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldkey,
       appBar: AppBar(
         title: Image.asset("assets/img/İnstagram.png",height: 50),
-        actions: [IconButton(onPressed: (){}, icon: Icon(Icons.near_me_sharp))],
+        actions: [IconButton(onPressed: (){}, icon: Icon(Icons.near_me_sharp,color: Colors.pinkAccent[400]))],
       ),
-      drawer: _buildDrawer(),
+      endDrawer: _buildDrawer(),
       body: _buildBody(),
       bottomNavigationBar: _buildBottomNavigationBar(),
     );
@@ -80,32 +106,90 @@ class _MyHomeState extends State<MyHome> {
     );
   }
   _buildBody() {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-            //Story Widget
-            SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(children: List.generate(10, (index) => Container(
-                  padding: EdgeInsets.all(5.0),
-                  child: Column(
-                    children: [
-                      CircleAvatar(
-                        radius: 35,
-                        backgroundImage: AssetImage("assets/img/story3.png"),
-                        child: CircleAvatar(
-                            radius: 30,
-                            backgroundImage: AssetImage(profileStory[index]),
+    return RefreshIndicator(
+      onRefresh: onRefresh,
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+              //Story Widget
+              SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(children: List.generate(10, (index) => Container(
+                    padding: EdgeInsets.all(5.0),
+                    child: Column(
+                      children: [
+                        CircleAvatar(
+                          radius: 35,
+                          backgroundImage: AssetImage("assets/img/story3.png"),
+                          child: CircleAvatar(
+                              radius: 30,
+                              backgroundImage: AssetImage(profileStory[index]),
+                          ),
                         ),
+                        Text("See story",style: TextStyle(fontSize: 12.0,fontFamily: 'Ubuntu-Medium',color: Colors.pink[600]),),
+                      ],
+                    ),
+                  )),
+                  ),
+              ),
+            Divider(),
+            Column(children: List.generate(10, (index) => Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  //Header posting
+                  Row(
+                    children: [
+                      Container(
+                          padding: EdgeInsets.all(10),
+                          child:  CircleAvatar(
+                            // radius: 35,
+                            backgroundImage: AssetImage("assets/img/story3.png"),
+                            child: CircleAvatar(
+                              // radius: 30,
+                              backgroundImage: AssetImage(profileStory[index]),
+                            ),
+                          ),
                       ),
-                      Text("See story",style: TextStyle(fontSize: 12.0,fontFamily: 'Ubuntu-Medium'),),
+                      Text("${username}",style: TextStyle(fontFamily: 'Ubuntu-Medium',fontSize: 16,color: Colors.blueGrey[800]),),
+                      Spacer(),
+                      IconButton(onPressed: (){}, icon: Icon(Icons.more_vert_sharp,color: Colors.pinkAccent[400],))
                     ],
                   ),
-                )),
-                ),
+                  //Image post
+                  Image.asset(post[index]),
+                  Row(
+                    children: [
+                      IconButton(icon: Icon(Icons.favorite_border_outlined,color: Colors.pinkAccent[400],),onPressed: (){}),
+                      IconButton(icon: Icon(Icons.chat_bubble_outline),onPressed: (){}),
+                      IconButton(icon: Icon(Icons.near_me_outlined),onPressed: (){}),
+                      Spacer(),
+                      IconButton(icon: Icon(Icons.bookmark_add_outlined),onPressed: (){}),
+                    ],
+                  ),
+                  Container(
+                    padding: EdgeInsets.all(8.0),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                         RichText(
+                           text: TextSpan(
+                             style: TextStyle(color: Colors.blueGrey[800]),
+                           children: [
+                             TextSpan(text: "Someone reached and others. See more...",style: TextStyle(fontFamily: 'Ubuntu-Medium'),),
+                             // TextSpan(text: "View more...",style: TextStyle(fontFamily: 'Ubuntu-Medium'),)
+                           ],
+                         ),),
+                          //U can put one or much Richtext here......??????
+                          Text("View 23 comments...",style: TextStyle(fontFamily: 'Ubuntu-Medium')),
+                        ],
+                    ),
+                  ),
+                ],
             ),
-          Divider(),
-        ],
+            ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -145,7 +229,7 @@ class _MyHomeState extends State<MyHome> {
             IconButton(icon: Icon(Icons.menu),
                       color: currentPage==4?Color.fromRGBO(203, 73, 101, 1):Color.fromRGBO(40, 40, 40, 1),
                       onPressed: (){
-                        _scaffoldkey.currentState!.openDrawer();
+                        _scaffoldkey.currentState!.openEndDrawer();
                         setState(() {
                           currentPage=4;
                         });
