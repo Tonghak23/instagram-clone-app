@@ -6,6 +6,33 @@ class MyHome extends StatefulWidget {
   _MyHomeState createState() => _MyHomeState();
 }
 class _MyHomeState extends State<MyHome> {
+  int _selectedIndex = 0;
+  static const TextStyle optionStyle =
+  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const List<Widget> _widgetOptions = <Widget>[
+    Text(
+      'Index 0: Home',
+      style: optionStyle,
+    ),
+    Text(
+      'Index 1: Business',
+      style: optionStyle,
+    ),
+    Text(
+      'Index 2: School',
+      style: optionStyle,
+    ),
+    Text(
+      'Index 3: Settings',
+      style: optionStyle,
+    ),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
       String profile = "https://static.wixstatic.com/media/902040_30336145aa8b40d8b6e898e3e107f92c~mv2.png/v1/fill/w_300,h_302,al_c,q_85,usm_0.66_1.00_0.01/User%2005c.webp";
       int currentPage=0;
       String username="Takexn404";
@@ -33,15 +60,15 @@ class _MyHomeState extends State<MyHome> {
             // "assets/img/12.jpg",
             // "assets/img/13.jpg",
             // "assets/img/14.jpg",
-            "assets/img/16.jpg",
-            "assets/img/17.jpg",
-            "assets/img/18.jpg",
-            "assets/img/19.jpg",
-            "assets/img/20.jpg",
-            "assets/img/21.jpg",
-            "assets/img/22.jpg",
+            "assets/img/1.jpg",
+            "assets/img/2.jpg",
+            "assets/img/3.jpg",
+            "assets/img/5.jpg",
+            "assets/img/8.jpg",
+            "assets/img/9.jpg",
+            "assets/img/12.jpg",
             "assets/img/23.jpg",
-            "assets/img/24.jpg",
+            "assets/img/15.png",
             "assets/img/25.jpg"
       ];
       Future<void> onRefresh()async{
@@ -60,7 +87,31 @@ class _MyHomeState extends State<MyHome> {
       bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
-
+  // _buildBottomNavigationBar() {
+  //       return BottomNavigationBar(
+  //         items: const <BottomNavigationBarItem>[
+  //           BottomNavigationBarItem(
+  //             icon: Icon(Icons.home_outlined,color: Colors.black,),
+  //             label: 'Home',
+  //           ),
+  //           BottomNavigationBarItem(
+  //             icon: Icon(Icons.play_circle_outline,color: Colors.black,),
+  //             label: 'Play',
+  //           ),
+  //           BottomNavigationBarItem(
+  //             icon: Icon(Icons.account_circle_outlined,color: Colors.black,),
+  //             label: 'Me',
+  //           ),
+  //           BottomNavigationBarItem(
+  //             icon: Icon(Icons.menu,color: Colors.black,),
+  //             label: 'Menu',
+  //           ),
+  //         ],
+  //         currentIndex: _selectedIndex,
+  //         selectedItemColor: Colors.pinkAccent[400],
+  //         onTap: _onItemTapped,
+  //   );
+  // }
   _buildDrawer() {
     return Drawer(
       child: ListView(
@@ -113,6 +164,7 @@ class _MyHomeState extends State<MyHome> {
           children: [
               //Story Widget
               SingleChildScrollView(
+                  physics: BouncingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   child: Row(children: List.generate(10, (index) => Container(
                     padding: EdgeInsets.all(5.0),
@@ -133,7 +185,8 @@ class _MyHomeState extends State<MyHome> {
                   ),
               ),
             Divider(),
-            Column(children: List.generate(10, (index) => Column(
+            Column(
+                children: List.generate(10, (index) => Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   //Header posting
