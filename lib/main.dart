@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_instagram_cloneapp/myhome.dart';
+import 'login_page.dart';
 void main() {
   runApp(MyApp());
 }
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
           iconTheme: IconThemeData(color: Color.fromRGBO(40, 40, 40, 1)),
         ),
         debugShowCheckedModeBanner: false,
-        home: MyHome(),
+        home: LoginPage(),
       ),
     );
   }

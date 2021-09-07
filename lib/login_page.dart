@@ -28,8 +28,8 @@ class _LoginPageState extends State<LoginPage> {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Colors.pinkAccent.shade700,
-              Colors.redAccent
+              Colors.pinkAccent.shade400,
+              Colors.white
             ],
           ),
       ),
@@ -53,7 +53,7 @@ class _LoginPageState extends State<LoginPage> {
   _buidTitle() {
     return Container(
       alignment: Alignment.center,
-      child: Image.network("https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/1200px-Instagram_logo.svg.png",fit: BoxFit.cover),
+      child: Image.asset("assets/img/İnstagram.png",fit: BoxFit.cover),
     );
   }
   _buildUsername() {
@@ -65,7 +65,8 @@ class _LoginPageState extends State<LoginPage> {
         maxWidth: 500
       ),
       decoration: BoxDecoration(
-        color: Colors.white60
+        color: Colors.white60,
+        borderRadius: BorderRadius.circular(10),
       ),
       child: TextField(
         keyboardType: TextInputType.emailAddress,
@@ -80,7 +81,29 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
   _buildpassword() {
-    return Container();
+    return Container(
+      margin: EdgeInsets.all(10),
+      padding: EdgeInsets.symmetric(horizontal: 20),
+      constraints: BoxConstraints(
+          maxHeight: 50,
+          maxWidth: 500
+      ),
+      decoration: BoxDecoration(
+          color: Colors.white60,
+          borderRadius: BorderRadius.circular(10),
+      ),
+      child: TextField(
+        keyboardType: TextInputType.visiblePassword,
+        autocorrect: false,
+        style: TextStyle(fontSize: 18.0,color: Colors.white),
+        decoration: InputDecoration(
+            hintText: "Password",
+            hintStyle:TextStyle(fontSize: 18.0,color: Colors.white),
+            border: InputBorder.none
+        ),
+        obscureText: true,
+      ),
+    );
   }
   _buildLoginButton() {
     return Container();
